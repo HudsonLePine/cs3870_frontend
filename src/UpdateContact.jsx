@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 
 export default function UpdateContact() {
-  const [contactName, setContactName] = useState("");
+  const [currentName, setCurrentName] = useState(""); // name to update
+  const [contactName, setContactName] = useState(""); // new name
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -12,21 +13,19 @@ export default function UpdateContact() {
     e.preventDefault();
     setResponseMsg("");
 
-    if (!contactId.trim()) {
-      setResponseMsg("Contact ID is required.");
+    if (!currentName.trim()) {
+      setResponseMsg("Current contact name is required.");
       return;
     }
 
     try {
       const res = await fetch(
-        `https://cs3870-backend-1-vu10.onrender.com/contacts/${contactName}`,
+        `https://cs3870-backend-1-vu10.onrender.com/contacts/${currentName}`,
         {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            contact_name: contactName,
+            contact_name: contactName, 
             phone_number: phoneNumber,
             message: message,
             image_url: imageUrl,
@@ -54,39 +53,43 @@ export default function UpdateContact() {
       <form onSubmit={handleUpdateContact}>
         <input
           type="text"
-          placeholder="Full Name"
+          placeholder="Current Contact Name"
+          value={currentName}
+          onChange={(e) => setCurrentName(e.target.value)}
+        />
+        <br /><br />
+
+        <input
+          type="text"
+          placeholder="New Full Name"
           value={contactName}
           onChange={(e) => setContactName(e.target.value)}
         />
-        <br />
-        <br />
+        <br /><br />
 
         <input
           type="text"
-          placeholder="Phone Number"
+          placeholder="New Phone Number"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-        <br />
-        <br />
+        <br /><br />
 
         <input
           type="text"
-          placeholder="Message"
+          placeholder="New Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <br />
-        <br />
+        <br /><br />
 
         <input
           type="text"
-          placeholder="Image URL"
+          placeholder="New Image URL"
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
         />
-        <br />
-        <br />
+        <br /><br />
 
         <button type="submit">Update Contact</button>
       </form>
@@ -97,5 +100,3 @@ export default function UpdateContact() {
     </div>
   );
 }
-
-
