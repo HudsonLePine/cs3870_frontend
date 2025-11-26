@@ -19,7 +19,7 @@ export default function UpdateContact() {
 
     try {
       const res = await fetch(
-        `https://cs3870-backend-1-vu10.onrender.com/contacts/${currentName}`,
+        `https://cs3870-backend-1-vu10.onrender.com/contacts/${contactName}`,
         {
           method: "PUT",
           headers: {
@@ -97,4 +97,5 @@ export default function UpdateContact() {
     </div>
   );
 }
+
 
