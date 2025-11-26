@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 
 export default function UpdateContact() {
-  const [contactId, setContactId] = useState("");
   const [contactName, setContactName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [message, setMessage] = useState("");
@@ -20,7 +19,7 @@ export default function UpdateContact() {
 
     try {
       const res = await fetch(
-        `https://cs3870-backend-1-vu10.onrender.com/contacts/${contactId}`,
+        `https://cs3870-backend-1-vu10.onrender.com/contacts/${currentName}`,
         {
           method: "PUT",
           headers: {
@@ -98,3 +97,4 @@ export default function UpdateContact() {
     </div>
   );
 }
+
